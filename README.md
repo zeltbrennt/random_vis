@@ -17,6 +17,8 @@ Each shape rotates based on the number of vertices: if prime, it rotates clockwi
 
 ## Mandelbrot
 
-A simple visualization of the Mandelbrot-Set. The mouse position corresponds to the value of $c$, while the points on the graph represent the values for $z$ for iteration 0 to 10, starting at $z_0 = 0 + 0i$.
+A simple visualization of the [Mandelbrot-Set](https://en.wikipedia.org/wiki/Mandelbrot_set). Any complex number $c$ is part of the set, if the function $f(z) = z^2 + c$ starting from $z_0 = 0$ does not diverge. The interactive part is inspired by [Ben Sparks](https://www.youtube.com/watch?v=FFftmWSzgmk) work. The mouse position corresponds to the value of $c$, while the points on the graph represent the values for $z$ for iteration 0 to 10. Numbers that are part of the set are colored black, while for any other number, the color represents the number of iterations it takes for $z$ to reach infinity[^1]. 
 
 ![](mandelbrot.gif)
+
+[^1]: infinity in this case is defined as a certain threshold, at wich the algorithm stops.
