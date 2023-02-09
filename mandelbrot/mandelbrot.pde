@@ -17,6 +17,7 @@ void setup() {
     int infinity = 16;
     transX = 2 * width / 3;
     transY = height / 2;
+    //create Mandelbrot-Set
     mandel = new color[width * height];
     for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
@@ -33,39 +34,41 @@ void setup() {
                 if (zreal * zreal + zimag * zimag > infinity) break;
                 n++;
             }
-            if (n == mandelIter) {
-                mandel[x + y * width] = color(10, 10,10);
-            } else {
-
-                mandel[x + y * width] = paint.getColor(n % 16);
-            }
+            mandel[x + y * width] = n == mandelIter ? color(10, 10,10) : paint.getColor(n % 16);
         }
     }
 }
 
 void draw() {
+    //update background to Mandelbrot-Set
     pixelDensity(1);
     loadPixels();
-    for (int i = 0; i < mandel.length; i++) {
-        pixels[i] = mandel[i];
-    }
+    for (int i = 0; i < mandel.length; i++) pixels[i] = mandel[i];
     updatePixels();
     
+    //get value for c and display at curser
     zreal = 0;
     zimag = 0;
     creal = map(mouseX, 0, width, MIN_REAL, MAX_REAL);
     cimag = map(mouseY, 0, height, MIN_IMAG, MAX_IMAG);
-    
-    
+    fill(0, 150);
+    stroke(0, 0);
+    rect(mouseX + 8, mouseY, 85, 14, 14);
+    fill(255, 255, 0);
+    text(String.format("c = %.2f + %.2fi", creal, cimag), mouseX + 10, mouseY + 10);
+    cursor(CROSS);
+
+    //add coordinates
     stroke(55);
-    translate(2 * width / 3, height / 2);
+    translate(transX, transY);
     line(0, -height, 0, height);
     line( -width, 0, width, 0);
-    stroke(200, 150, 0);
-    noFill();
-    beginShape();
-    float real, imag, vx, vy;
     stroke(255);
+    noFill();
+
+    //draw iterations of z
+    float real, imag, vx, vy;
+    beginShape();
     vertex(0, 0);
     for (int i = 0; i < depth; ++i) {
         real = zreal * zreal - zimag * zimag;
@@ -74,8 +77,6 @@ void draw() {
         zimag = imag + cimag;
         vx = map(zreal, MIN_REAL, MAX_REAL, -transX, transX / 2);
         vy = map(zimag, MIN_IMAG, MAX_IMAG, -transY, transY);
-        if (i==0) stroke(255, 255, 0);
-        else stroke(255);
         circle(vx, vy, 5);
         vertex(vx, vy);
     }
