@@ -7,12 +7,14 @@ float MIN_IMAG = -1.2;
 float MAX_IMAG = 1.2;
 float transX, transY;
 color[] mandel;
-
+fractalColor paint;
 
 void setup() {
     size(800, 600);
+    paint = new fractalColor();
     depth = 10;
-    int mandelIter = 50;
+    int mandelIter = 32;
+    int infinity = 16;
     transX = 2 * width / 3;
     transY = height / 2;
     mandel = new color[width * height];
@@ -28,14 +30,14 @@ void setup() {
                 imag = 2 * zreal * zimag;
                 zreal = real + creal;
                 zimag = imag + cimag;
-                if (abs(zreal + zimag) > 16) break;
+                if (zreal * zreal + zimag * zimag > infinity) break;
                 n++;
             }
             if (n == mandelIter) {
                 mandel[x + y * width] = color(10, 10,10);
             } else {
-                int c = int(map(n, 0, mandelIter, 100, 250));
-                mandel[x + y * width] = color(c, c, c);
+
+                mandel[x + y * width] = paint.getColor(n % 16);
             }
         }
     }
@@ -65,7 +67,6 @@ void draw() {
     float real, imag, vx, vy;
     stroke(255);
     vertex(0, 0);
-    circle(0, 0, 5);
     for (int i = 0; i < depth; ++i) {
         real = zreal * zreal - zimag * zimag;
         imag = 2 * zreal * zimag;
@@ -73,9 +74,11 @@ void draw() {
         zimag = imag + cimag;
         vx = map(zreal, MIN_REAL, MAX_REAL, -transX, transX / 2);
         vy = map(zimag, MIN_IMAG, MAX_IMAG, -transY, transY);
+        if (i==0) stroke(255, 255, 0);
+        else stroke(255);
         circle(vx, vy, 5);
         vertex(vx, vy);
     }
     endShape();
-    
+    //saveFrame("images/####.png");
 }
