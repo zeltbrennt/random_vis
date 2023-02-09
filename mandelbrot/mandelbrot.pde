@@ -2,17 +2,17 @@ float creal, cimag;
 int depth;
 float zreal, zimag;
 float MIN_REAL = -2.2;
-float MAX_REAL = 0.7;
-float MIN_IMAG = -1.2;
-float MAX_IMAG = 1.2;
+float MAX_REAL = 0.8;
+float MIN_IMAG = -1.5;
+float MAX_IMAG = 1.5;
 float transX, transY;
 color[] mandel;
 fractalColor paint;
 
 void setup() {
-    size(800, 600);
+    size(800, 800);
     paint = new fractalColor();
-    depth = 10;
+    depth = 20;
     int mandelIter = 32;
     int infinity = 16;
     transX = 2 * width / 3;
@@ -38,6 +38,11 @@ void setup() {
         }
     }
 }
+/*
+TODO:
+    - implement zooming in
+    - implement parallel julia set
+*/
 
 void draw() {
     //update background to Mandelbrot-Set
@@ -57,7 +62,7 @@ void draw() {
     fill(255, 255, 0);
     text(String.format("c = %.2f + %.2fi", creal, cimag), mouseX + 10, mouseY + 10);
     cursor(CROSS);
-
+    
     //add coordinates
     stroke(55);
     translate(transX, transY);
@@ -65,7 +70,7 @@ void draw() {
     line( -width, 0, width, 0);
     stroke(255);
     noFill();
-
+    
     //draw iterations of z
     float real, imag, vx, vy;
     beginShape();
@@ -77,7 +82,9 @@ void draw() {
         zimag = imag + cimag;
         vx = map(zreal, MIN_REAL, MAX_REAL, -transX, transX / 2);
         vy = map(zimag, MIN_IMAG, MAX_IMAG, -transY, transY);
+        stroke(250, 250, 0, 200);
         circle(vx, vy, 5);
+        stroke(250, 200);
         vertex(vx, vy);
     }
     endShape();
