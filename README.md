@@ -14,3 +14,9 @@ Still have to find the name of this thing. The idea is basicaly to have a circle
 Each shape rotates based on the number of vertices: if prime, it rotates clockwise, if even, it rotates counter-clockwise.
 
 ![](rose.gif)
+
+## Mandelbrot
+
+A simple visualization of the Mandelbrot-Set. The mouse position corresponds to the value of $c$, while the points on the graph represent the values for $z$ for iteration 0 to 10, starting at $z_0 = 0 + 0i$.
+
+![](mandelbrot.gif)
