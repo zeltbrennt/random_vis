@@ -1,22 +1,29 @@
 float creal, cimag;
 int depth;
 float zreal, zimag;
-float MIN_REAL = -2.2;
-float MAX_REAL = 0.8;
+float MIN_REAL = -2.5;
+float MAX_REAL = 1;
 float MIN_IMAG = -1.5;
 float MAX_IMAG = 1.5;
 float transX, transY;
 color[] mandel;
 fractalColor paint;
+int mandelIter;
+int infinity;
 
-void setup() {
-    size(800, 800);
-    paint = new fractalColor();
+void settings() {
+    int windowSize = 800;
+    float d = (abs(MIN_REAL) + MAX_REAL) / (abs(MIN_IMAG) + MAX_IMAG);
+    size(int(windowSize * d), windowSize);
     depth = 20;
-    int mandelIter = 31;
-    int infinity = 7;
+    mandelIter = 31;
+    infinity = 7;
     transX = 2 * width / 3;
     transY = height / 2;
+}
+
+void setup() {
+    paint = new fractalColor();
     //create Mandelbrot-Set
     mandel = new color[width * height];
     for (int x = 0; x < width; x++) {
@@ -40,8 +47,8 @@ void setup() {
 }
 /*
 TODO:
-    - implement zooming in
-    - implement parallel julia set
+- implement zooming in
+- implement parallel julia set
 */
 
 void draw() {
@@ -60,28 +67,30 @@ void draw() {
     stroke(0, 0);
     rect(mouseX + 8, mouseY, 85, 14, 14);
     fill(255, 255, 0);
-    text(String.format("c = %.2f + %.2fi", creal, cimag), mouseX + 10, mouseY + 10);
+    text(String.format("c = %.2f %s %.2fi", creal, cimag < 0 ? "-" : "+", abs(cimag)), mouseX + 10, mouseY + 10);
     cursor(CROSS);
     
     //add coordinates
     stroke(55);
-    translate(transX, transY);
-    line(0, -height, 0, height);
-    line( -width, 0, width, 0);
+    // in a variable....??
+    line(map(MIN_REAL, MIN_REAL, MAX_REAL, 0, width), map(0, MIN_IMAG, MAX_IMAG, 0, height), map(MAX_REAL, MIN_REAL, MAX_REAL, 0, width), map(0, MIN_IMAG, MAX_IMAG, 0, height));
+    line(map(0, MIN_REAL, MAX_REAL, 0, width), map(MIN_IMAG, MIN_IMAG, MAX_IMAG, 0, height), map(0, MIN_REAL, MAX_REAL, 0, width), map(MAX_IMAG, MIN_IMAG, MAX_IMAG, 0, height));
+    
     stroke(255);
     noFill();
     
     //draw iterations of z
     float real, imag, vx, vy;
     beginShape();
-    vertex(0, 0);
+    vertex(map(0, MIN_REAL, MAX_REAL, 0, width),map(0, MIN_IMAG, MAX_IMAG, 0, height));
     for (int i = 0; i < depth; ++i) {
         real = zreal * zreal - zimag * zimag;
         imag = 2 * zreal * zimag;
         zreal = real + creal;
         zimag = imag + cimag;
-        vx = map(zreal, MIN_REAL, MAX_REAL, -transX, transX / 2);
-        vy = map(zimag, MIN_IMAG, MAX_IMAG, -transY, transY);
+        vx = map(zreal, MIN_REAL, MAX_REAL, 0, width);
+        vy = map(zimag, MIN_IMAG, MAX_IMAG, 0, height);
+        if (zreal * zreal + zimag * zimag > infinity) break;
         stroke(250, 250, 0, 200);
         circle(vx, vy, 5);
         stroke(250, 200);
