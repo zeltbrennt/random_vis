@@ -13,8 +13,8 @@ void setup() {
     size(800, 800);
     paint = new fractalColor();
     depth = 20;
-    int mandelIter = 32;
-    int infinity = 16;
+    int mandelIter = 31;
+    int infinity = 7;
     transX = 2 * width / 3;
     transY = height / 2;
     //create Mandelbrot-Set
