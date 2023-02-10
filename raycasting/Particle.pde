@@ -32,6 +32,7 @@ class Particle {
     
     void move(int step) {
         PVector vel = PVector.fromAngle(heading);
+        vel.setMag(step);
         pos.add(vel);
         }
     
@@ -44,6 +45,8 @@ class Particle {
                 PVector pt = rays[i].cast(wall);
                 if (pt != null) {
                     float dist = PVector.dist(pos, pt);
+                    float theta = rays[i].dir.heading() - heading;
+                    dist *= cos(theta);
                     if (dist < minDist) {
                         minDist = dist;
                         closest = pt;

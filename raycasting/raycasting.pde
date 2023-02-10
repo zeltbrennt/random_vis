@@ -21,8 +21,8 @@ void setup() {
 void keyPressed() { //key is down
     if (key == 'a') particle.rotate(-0.1);
     else if (key == 'd') particle.rotate(0.1);
-    else if (key == 'w') particle.move(20);
-    else if (key == 's') particle.move(-20);
+    else if (key == 'w') particle.move(10);
+    else if (key == 's') particle.move(-10);
 }
 
 void draw() {
