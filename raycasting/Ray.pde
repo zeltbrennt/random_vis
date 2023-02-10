@@ -13,6 +13,10 @@ class Ray {
         dir.normalize();
     }
     
+    void setAngle(float angle) {
+        dir = PVector.fromAngle(angle);
+    }
+
     void show() {
         stroke(255);
         pushMatrix();

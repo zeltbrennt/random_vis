@@ -4,12 +4,14 @@ class Particle {
     Ray[] rays;
     int fov = 40;
     int res = 1;
+    float heading;
     
     Particle() {
-        pos = new PVector(0, 0); // make it move 
+        pos = new PVector(sceneH / 2, sceneW / 2); // make it move 
         rays = new Ray[fov / res];
+        heading = 0;
         for (int i = 0; i < rays.length; i++) {
-            rays[i] = new Ray(pos, radians(i * res));
+            rays[i] = new Ray(pos, radians( - fov / 2 + i * res));
         }
     }
     
@@ -20,6 +22,18 @@ class Particle {
             r.show();
         }
     }
+    
+    void rotate(float angle) {
+        heading += angle;
+        for (int i = 0; i < rays.length; i++) {
+            rays[i].setAngle(radians(-fov / 2 + i) + heading);
+        }
+    }
+    
+    void move(int step) {
+        PVector vel = PVector.fromAngle(heading);
+        pos.add(vel);
+        }
     
     float[] look(Boundary[] walls) {
         float[] scene = new float[fov];
