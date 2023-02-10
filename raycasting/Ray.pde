@@ -2,9 +2,9 @@ class Ray {
     PVector pos;
     PVector dir;
     
-    Ray(int x, int y) {
-        pos = new PVector(x, y);
-        dir = new PVector(1, 0);
+    Ray(PVector pos, float angle) {
+        this.pos = pos;
+        dir = PVector.fromAngle(angle);  
     }
 
     void lookAt(float x, float y) {
@@ -17,7 +17,7 @@ class Ray {
         stroke(255);
         pushMatrix();
         translate(pos.x, pos.y);
-        line(0, 0, dir.x * 10, dir.y * 10); //for showing  alitte biggeer
+        line(0, 0, dir.x, dir.y); //for showing  alitte biggeer
         popMatrix();
     }
     
