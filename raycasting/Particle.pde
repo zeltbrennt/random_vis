@@ -7,7 +7,7 @@ class Particle {
     float heading;
     
     Particle() {
-        pos = new PVector(sceneH / 2, sceneW / 2); // make it move 
+        pos = new PVector(sceneH / 2, sceneW / 2); 
         rays = new Ray[fov / res];
         heading = 0;
         for (int i = 0; i < rays.length; i++) {
@@ -36,6 +36,7 @@ class Particle {
         pos.add(vel);
         }
     
+    // check all walls if the particle can see them, returns distance to each visible point
     float[] look(Boundary[] walls) {
         float[] scene = new float[fov];
         for (int i = 0; i < rays.length; i++) {

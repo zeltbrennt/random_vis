@@ -27,12 +27,10 @@ void keyPressed() { //key is down
 
 void draw() {
     
-    
     background(0);
-    
     // cast rays to visible walls
     for (Boundary wall : walls) wall.show(); 
-    //particle.update(min(mouseX, sceneW), mouseY);
+    particle.update(min(mouseX, sceneW), mouseY);
     particle.show();
     
     // render visible scene
@@ -50,5 +48,5 @@ void draw() {
     }
     popMatrix();
     
-    
+    saveFrame("images/####.png");
 }

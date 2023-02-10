@@ -21,10 +21,11 @@ class Ray {
         stroke(255);
         pushMatrix();
         translate(pos.x, pos.y);
-        line(0, 0, dir.x, dir.y); //for showing  alitte biggeer
+        line(0, 0, dir.x, dir.y); 
         popMatrix();
     }
     
+    // collision detection by hand
     PVector cast(Boundary wall) {
         // start and endpoints of the wall
         float x1 = wall.a.x;
