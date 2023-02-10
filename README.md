@@ -12,11 +12,15 @@ The graph for the first 10 values of $z$ for every given $c$ is only shown on th
 
 ![](mandelbrot.gif)
 
-[^1]: infinity in this case is defined as a certain threshold, at wich the algorithm stops.
+## Raycasting
+
+This is a recreation of the [Coding challange #146](https://www.youtube.com/watch?v=vYgIKn7iDH8&t=578s) from codingtrain. I might expand this further in the future. Basic movement is possible via ``WASD``. I could integrate the maze creating algorithm to have a more interesting scene.
+
+![](doom.gif)
 
 ## Labrith creating algorithm
 
-A simple [recursive backtracking algorithm using depth first search](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_implementation) to generate a maze.
+A simple [recursive backtracking algorithm using depth first search](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_implementation) to generate a maze. Recreation of [Coding Challange #10](https://www.youtube.com/watch?v=HyK_Q5rrcr4) from codingtrain.
 
 ![](lab_vis.gif)
 
@@ -28,3 +32,4 @@ Each shape rotates based on the number of vertices: if prime, it rotates clockwi
 
 ![](rose.gif)
 
+[^1]: infinity in this case is defined as a certain threshold, at wich the algorithm stops.
