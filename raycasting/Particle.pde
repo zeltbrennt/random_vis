@@ -6,7 +6,7 @@ class Particle {
     int res = 10;
 
     Particle() {
-        pos = new PVector(200, 200); // make it move 
+        pos = new PVector(0, 0); // make it move 
         rays = new Ray[fov / res];
         for (int i = 0; i < rays.length; i++) {
             rays[i] = new Ray(pos, radians(i * res));
