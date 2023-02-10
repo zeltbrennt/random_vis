@@ -2,7 +2,7 @@ class Particle {
     
     PVector pos;
     Ray[] rays;
-    int fov = 360;
+    int fov = 40;
     int res = 1;
     
     Particle() {
@@ -21,12 +21,13 @@ class Particle {
         }
     }
     
-    void look(Boundary[] walls) {
-        for (Ray ray : rays) {
+    float[] look(Boundary[] walls) {
+        float[] scene = new float[fov];
+        for (int i = 0; i < rays.length; i++) {
             float minDist = 2 << 16;
             PVector closest = null;
             for (Boundary wall : walls) {
-                PVector pt = ray.cast(wall);
+                PVector pt = rays[i].cast(wall);
                 if (pt != null) {
                     float dist = PVector.dist(pos, pt);
                     if (dist < minDist) {
@@ -36,8 +37,10 @@ class Particle {
                 }
             }
             stroke(255, 100);
+            scene[i] = minDist;
             if (closest != null) line(pos.x, pos.y, closest.x, closest.y);
         } 
+        return scene;
     }
     
     void update(int x, int y) {
