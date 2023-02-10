@@ -23,7 +23,7 @@ void draw() {
     }
     particle.update(mouseX, mouseY);
     particle.show();
-    //particle.look(wall);
+    particle.look(walls);
     
     
 }
