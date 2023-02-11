@@ -39,3 +39,10 @@ Each shape rotates based on the number of vertices: if prime, it rotates clockwi
 ![](rose.gif)
 
 [^1]: infinity in this case is defined as a certain threshold, at wich the algorithm stops.
+
+## Warpspeed
+
+2D-Animation like the Warp-Speed-Effect from Star Trek. Points just speed up and increase in size depending on its distance to the center of the frame.
+
+![](starfield.gif)
+
