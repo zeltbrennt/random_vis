@@ -15,10 +15,17 @@ class Point {
 
     void show() {
         circle(x, y, 5);
+       // text("(" + x + ", " + y + ")", x, y, 5);
     }
 
-    void show(int i) {
-        point(x, y);
-        text(i, x, y, 12);
+
+    void show(color c) {
+        fill(c);
+        circle(x, y, 6);
+        //text("(" + x + ", " + y + ")", x, y, 5);
+    }
+
+    String toString() {
+        return "(" + x + ", " + y + ")";
     }
 }

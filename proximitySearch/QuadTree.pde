@@ -33,13 +33,13 @@ class QuadTree {
         if (childSouthWest.insert(point)) return true;
         return false;
     }
-
+    
     void subdivide() {
         
-        Rectangle ne = new Rectangle(root.x + root.width / 2, root.y - root.height / 2, root.width / 2, root.height / 2);
-        Rectangle nw = new Rectangle(root.x - root.width / 2, root.y - root.height / 2, root.width / 2, root.height / 2);
-        Rectangle se = new Rectangle(root.x + root.width / 2, root.y + root.height / 2, root.width / 2, root.height / 2);
-        Rectangle sw = new Rectangle(root.x - root.width / 2, root.y + root.height / 2, root.width / 2, root.height / 2);
+        Rectangle ne = new Rectangle(root.x + root.w / 2, root.y - root.h / 2, root.w / 2, root.h / 2);
+        Rectangle nw = new Rectangle(root.x - root.w / 2, root.y - root.h / 2, root.w / 2, root.h / 2);
+        Rectangle se = new Rectangle(root.x + root.w / 2, root.y + root.h / 2, root.w / 2, root.h / 2);
+        Rectangle sw = new Rectangle(root.x - root.w / 2, root.y + root.h / 2, root.w / 2, root.h / 2);
         childNortEast = new QuadTree(ne, capacity);
         childNortWest = new QuadTree(nw, capacity);
         childSouthEast = new QuadTree(se, capacity);
@@ -55,6 +55,24 @@ class QuadTree {
         points = null;
     }
     
+    ArrayList<Point> query(Rectangle area, ArrayList<Point> found) {
+        if (!area.intesects(root)) return found;
+        if (isLeaf) {
+            for (Point p: points) if (p != null) found.add(p);
+            return found;
+        }
+        childNortEast.query(area, found);
+        childNortWest.query(area, found);
+        childSouthEast.query(area, found);
+        childSouthWest.query(area, found);
+        return found;
+    }
+
+    ArrayList<Point> query(Rectangle area) {
+        ArrayList<Point> found = new ArrayList<Point>();
+        return query(area, found);
+    }
+    
     String toString() {
         return String.format("[size: %d/%d, NE: %s, NW: %s, SE: %s, SW: %s]\n", size, capacity, childNortEast, childNortWest, childSouthEast, childSouthWest);
     }
@@ -63,7 +81,9 @@ class QuadTree {
         stroke(100);
         fill(100, 20);
         rectMode(CENTER);
-        rect(root.x, root.y, root.width * 2, root.height * 2);
+        rect(root.x, root.y, root.w * 2, root.h * 2);
+        //fill(255);
+        //text("(" + root.x + ", " + root.y + ")", root.x - root.w, root.y - root.h + 12);
         if (!isLeaf) {
             childNortEast.show();
             childNortWest.show();
