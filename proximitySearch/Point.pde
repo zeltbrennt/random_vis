@@ -14,14 +14,14 @@ class Point {
     }
 
     void show() {
-        circle(x, y, 5);
+        circle(x, y, 4);
        // text("(" + x + ", " + y + ")", x, y, 5);
     }
 
 
     void show(color c) {
         fill(c);
-        circle(x, y, 6);
+        circle(x, y, 4);
         //text("(" + x + ", " + y + ")", x, y, 5);
     }
 

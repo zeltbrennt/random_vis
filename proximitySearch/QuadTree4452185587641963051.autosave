@@ -21,7 +21,7 @@ class QuadTree {
         // don't inset, if not in bounds
         if (!root.contains(point)) return false;
         // only insert if not at capacity
-        if (size < capacity || root.w == 1 || root.h == 1) {
+        if (size < capacity) {
             points[size] = point;
             size++;
             return true;
@@ -36,14 +36,10 @@ class QuadTree {
     
     void subdivide() {
         
-        int childWidth = root.w / 2;
-        int childHeight = root.h / 2;
-        boolean oddWidth = root.w % 2 != 0;
-        boolean oddHeight = root.h % 2 != 0;
-        Rectangle nw = new Rectangle(root.x - root.w / 2, root.y - root.h / 2, oddWidth ? childWidth + 1 : childWidth, oddHeight ? childHeight + 1 : childHeight);
-        Rectangle ne = new Rectangle(root.x + root.w / 2, root.y - root.h / 2, childWidth, oddHeight ? childHeight + 1 : childHeight);
-        Rectangle se = new Rectangle(root.x + root.w / 2, root.y + root.h / 2, childWidth, childHeight);
-        Rectangle sw = new Rectangle(root.x - root.w / 2, root.y + root.h / 2, oddWidth ? childWidth + 1 : childWidth, childHeight);
+        Rectangle nw = new Rectangle(root.x - root.w / 2, root.y - root.h / 2, root.w / 2, root.h / 2);
+        Rectangle ne = new Rectangle(root.x + root.w / 2, root.y - root.h / 2, root.w / 2, root.h / 2);
+        Rectangle se = new Rectangle(root.x + root.w / 2, root.y + root.h / 2, root.w / 2, root.h / 2);
+        Rectangle sw = new Rectangle(root.x - root.w / 2, root.y + root.h / 2, root.w / 2, root.h / 2);
         childNortWest = new QuadTree(nw, capacity);
         childNortEast = new QuadTree(ne, capacity);
         childSouthEast = new QuadTree(se, capacity);
@@ -84,11 +80,11 @@ class QuadTree {
     
     void show() {
         stroke(100);
-        fill(100, 5);
+        fill(100, 20);
         rectMode(CENTER);
         rect(root.x, root.y, root.w * 2, root.h * 2);
         //fill(255);
-        //text("(" + root.x + ", " + root.y + ")", root.x - root.w, root.y + root.h);
+        //text("(" + root.x + ", " + root.y + ")", root.x - root.w, root.y - root.h + 12);
         if (!isLeaf) {
             childNortWest.show();
             childNortEast.show();
