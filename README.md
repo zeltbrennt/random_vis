@@ -18,11 +18,17 @@ This is a recreation of the [Coding challange #146](https://www.youtube.com/watc
 
 ![](doom.gif)
 
-## Labrith creating algorithm
+## Labyrinth creating algorithm
 
 A simple [recursive backtracking algorithm using depth first search](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_implementation) to generate a maze. Recreation of [Coding Challange #10](https://www.youtube.com/watch?v=HyK_Q5rrcr4) from codingtrain.
 
 ![](lab_vis.gif)
+
+## Quadtree
+
+Another codingtraing Coding [Challenge](https://www.youtube.com/watch?v=OJxEcs0w_kE&t=736s) (#98). Here it's to demonstrate the [Quadtree](https://en.wikipedia.org/wiki/Quadtree) data-structure, to minimize the load of other algorithms. 
+
+![](proxy_search.gif)
 
 ## Rose
 
