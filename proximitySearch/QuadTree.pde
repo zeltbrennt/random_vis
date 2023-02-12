@@ -40,10 +40,10 @@ class QuadTree {
         int childHeight = root.h / 2;
         boolean oddWidth = root.w % 2 != 0;
         boolean oddHeight = root.h % 2 != 0;
-        Rectangle nw = new Rectangle(root.x - root.w / 2, root.y - root.h / 2, oddWidth ? childWidth + 1 : childWidth, oddHeight ? childHeight + 1 : childHeight);
-        Rectangle ne = new Rectangle(root.x + root.w / 2, root.y - root.h / 2, childWidth, oddHeight ? childHeight + 1 : childHeight);
-        Rectangle se = new Rectangle(root.x + root.w / 2, root.y + root.h / 2, childWidth, childHeight);
-        Rectangle sw = new Rectangle(root.x - root.w / 2, root.y + root.h / 2, oddWidth ? childWidth + 1 : childWidth, childHeight);
+        Rectangle nw = new Rectangle(root.x - childWidth, root.y - childHeight, oddWidth ? childWidth + 1 : childWidth, oddHeight ? childHeight + 1 : childHeight);
+        Rectangle ne = new Rectangle(root.x + (oddWidth ? childWidth + 1 : childWidth), root.y - childHeight, childWidth, oddHeight ? childHeight + 1 : childHeight);
+        Rectangle se = new Rectangle(root.x + (oddWidth ? childWidth + 1 : childWidth), root.y + (oddHeight ? childHeight + 1 : childHeight), childWidth, childHeight);
+        Rectangle sw = new Rectangle(root.x - childWidth, root.y + (oddHeight ? childHeight + 1 : childHeight), oddWidth ? childWidth + 1 : childWidth, childHeight);
         childNortWest = new QuadTree(nw, capacity);
         childNortEast = new QuadTree(ne, capacity);
         childSouthEast = new QuadTree(se, capacity);

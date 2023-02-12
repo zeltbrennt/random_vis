@@ -15,7 +15,7 @@ class Point {
 
     void show() {
         circle(x, y, 4);
-       // text("(" + x + ", " + y + ")", x, y, 5);
+        //text("(" + x + ", " + y + ")", x, y, 5);
     }
 
 

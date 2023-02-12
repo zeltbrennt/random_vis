@@ -13,7 +13,7 @@ class Rectangle {
     }
     
     boolean contains(Point point) {
-        return point.x >= x - w && point.x < x + w && point.y >= y - h && point.y < y + h;
+        return point.x >= x - w && point.x <= x + w && point.y >= y - h && point.y <= y + h;
     }
     
     boolean intesects(Rectangle other) {
