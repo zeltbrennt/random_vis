@@ -46,3 +46,8 @@ Each shape rotates based on the number of vertices: if prime, it rotates clockwi
 
 ![](starfield.gif)
 
+## Recamán-Sequence
+
+$a_n = a_{n-1} -n \text{ if } a_{n-1} -n > 0 \text{ and not alredy in sequence, }a_{n-1} + n \text{ otherwise}$. It's assumed, but not proven, that this will eventually reach every Number in $\N^+$
+
+![](recaman.svg)
