@@ -51,3 +51,9 @@ Each shape rotates based on the number of vertices: if prime, it rotates clockwi
 $a_n = a_{n-1} -n \text{ if } a_{n-1} -n > 0 \text{ and not alredy in sequence, }a_{n-1} + n \text{ otherwise}$. It's assumed, but not proven, that this will eventually reach every Number in $\N^+$
 
 ![](recaman.svg)
+
+## Feigenbaum-Diagram
+
+Shows the [Feigenbaum-Diagram](https://en.wikipedia.org/wiki/Logistic_map) of the function $x_{n+1} = rx_n(1-x_n)$, where $x$ is a population-size relative to a maximum and $r$ is a growth-rate over a certain period. For different values of $r$ the population either stabilizes, oscillates between $2^i$ values or shows chaotic behavior. The starting conditions have little to no influence on the populations after a few iterations. 
+
+![](feigenbaum.gif)
